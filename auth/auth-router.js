@@ -2,9 +2,10 @@ const router = require("express").Router();
 const User = require("../models/User");
 const jwt = require("jsonwebtoken");
 const bcrypt = require("bcryptjs");
+const checkEmailExist = require("../middleware/auth");
 
-router.post("/register", (req, res) => {
-  const newUser = req.body;
+router.post("/register", checkEmailExist, (req, res) => {
+  const newUser = req.user;
 
   User.create(newUser)
     .then(user => {
@@ -29,7 +30,7 @@ router.post("/login", (req, res) => {
 
 router.get("/", (req, res) => {
   User.find()
-    .then(users => res.status(200).json(users))
+    .then(users => res.status(200).json({ users }))
     .catch(err => {
       res.status(500).json(err);
     });
