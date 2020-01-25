@@ -2,6 +2,9 @@ const express = require("express");
 const dotenv = require("dotenv");
 const connectDB = require("./config/db");
 const cors = require("cors");
+const socket = require("socket.io");
+const http = require("http").createServer();
+
 dotenv.config();
 connectDB();
 const app = express();
@@ -19,6 +22,12 @@ app.get("/", (req, res) => {
 
 const server = app.listen(PORT, () => {
   console.log(`app is running on port ${PORT}`);
+});
+
+const io = socket(http);
+
+io.on("connection", socket => {
+  console.log(`socket is on !`);
 });
 
 process.on("unhandledRejection", (err, promise) => {
