@@ -3,11 +3,11 @@ const dotenv = require("dotenv");
 const connectDB = require("./config/db");
 const cors = require("cors");
 const socket = require("socket.io");
-const http = require("http").createServer();
 
 dotenv.config();
 connectDB();
 const app = express();
+const server = require("http").Server(app);
 const authRouter = require("./auth/auth-router.js");
 
 const PORT = process.env.PORT || 8000;
@@ -20,14 +20,15 @@ app.get("/", (req, res) => {
   res.status(200).json({ message: process.env.MESSAGE || "deployed" });
 });
 
-const server = app.listen(PORT, () => {
+app.listen(PORT, () => {
   console.log(`app is running on port ${PORT}`);
 });
 
-const io = socket(http);
+const io = socket(server);
 
 io.on("connection", socket => {
   console.log(`socket is on !`);
+  socket.emit("welcome back", { msg: "welcome back" });
 });
 
 process.on("unhandledRejection", (err, promise) => {
