@@ -1,3 +1,5 @@
+const User = require("../models/User");
+
 module.exports = checkEmailExist = async (req, res, next) => {
   const { email, username, password } = req.body;
 
