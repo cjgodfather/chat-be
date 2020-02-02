@@ -1,7 +1,8 @@
 const router = require("express").Router();
 const Chat = require("../models/Chat");
+const checkChatExist = require("../middleware/chat");
 
-router.post("/", async (req, res) => {
+router.post("/", checkChatExist, async (req, res) => {
   const { user1, user2 } = req.body;
   try {
     const newChat = await Chat.create({ user1, user2 });

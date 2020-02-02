@@ -10,9 +10,11 @@ const ConvsersationSchema = new mongoose.Schema({
   },
   sender: {
     type: mongoose.ObjectId,
-    ref: "User"
+    ref: "User",
+    required: true
   },
   chatId: {
+    required: true,
     type: mongoose.ObjectId,
     ref: "Chat"
   }
