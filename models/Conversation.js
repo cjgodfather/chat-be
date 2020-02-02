@@ -6,7 +6,15 @@ const ConvsersationSchema = new mongoose.Schema({
     default: Date.now
   },
   text: {
-    type: [String]
+    type: String
+  },
+  sender: {
+    type: mongoose.ObjectId,
+    ref: "User"
+  },
+  chatId: {
+    type: mongoose.ObjectId,
+    ref: "Chat"
   }
 });
 
