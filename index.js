@@ -9,6 +9,7 @@ connectDB();
 
 const authRouter = require("./auth/auth-router.js");
 const chatRouter = require("./chat/chat-router.js");
+const messageRouter = require("./message/message-router.js");
 
 const PORT = process.env.PORT || 8000;
 
@@ -16,6 +17,7 @@ app.use(cors());
 app.use(express.json());
 app.use("/api/auth", authRouter);
 app.use("/api/chat", chatRouter);
+app.use("/api/message", messageRouter);
 
 app.get("/", (req, res) => {
   res.status(200).json({ message: process.env.MESSAGE || "deployed" });
