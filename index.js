@@ -28,7 +28,7 @@ const server = app.listen(PORT, () => {
 });
 
 const io = require("socket.io")(server);
-io.on("connection", socket => {
+io.of("/chat").on("connection", socket => {
   console.log(`socket is on !`);
   socket.emit("welcome back", { msg: "welcome back" });
   socket.on("message", data => {

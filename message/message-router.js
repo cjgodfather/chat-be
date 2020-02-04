@@ -21,7 +21,9 @@ router.get("/:chatId", async (req, res) => {
     const allMessages = await Message.find({ chatId });
     // console.log(allMessages);
     res.status(200).json(allMessages);
-  } catch (err) {}
+  } catch (err) {
+    console.log(err);
+  }
 });
 
 router.delete("/:chatId", async (req, res) => {
