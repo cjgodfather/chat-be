@@ -24,6 +24,17 @@ router.get("/", async (req, res) => {
   }
 });
 
+router.get("/:friendId", async (req, res) => {
+  const user1 = req.body;
+  const user2 = req.params;
+  try {
+    const chat = await Chat.find({ user1, user2 });
+    res.status(200).json(chat);
+  } catch (err) {
+    console.log(err);
+  }
+});
+
 router.delete("/:id", async (req, res) => {
   const id = req.params.id;
   try {
